@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefWidth="820" prefHeight="560"
+  xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+
+  <top>
+    <VBox spacing="14" style="-fx-padding: 22 24 14 24;">
+      <HBox styleClass="nav-bar" spacing="4">
+        <Button text="📚  Бібліотека" onAction="#onGoLibraryClick" styleClass="nav-btn"/>
+        <Button text="🎶  Плейлисти" styleClass="nav-btn-active"/>
+        <Button text="💱  Конвертер" onAction="#onOpenConverterClick" styleClass="nav-btn"/>
+        <Button text="⚙  Налаштування" onAction="#onOpenSettingsClick" styleClass="nav-btn"/>
+        <Button fx:id="adminButton" text="👤  Адмін" onAction="#onOpenAdminClick"
+          visible="false" managed="false" styleClass="nav-btn"/>
+      </HBox>
+      <Label text="🎶 Мої плейлисти" styleClass="page-title"/>
+    </VBox>
+  </top>
+
+  <center>
+    <HBox spacing="16">
+      <BorderPane.margin>
+        <Insets left="24" right="24" bottom="20"/>
+      </BorderPane.margin>
+
+      <VBox styleClass="card" spacing="10" prefWidth="240">
+        <Label text="Плейлисти" style="-fx-font-weight: bold;"/>
+        <ListView fx:id="playlistsListView" VBox.vgrow="ALWAYS"/>
+        <HBox spacing="6">
+          <TextField fx:id="newPlaylistField" promptText="Назва нового плейлиста" HBox.hgrow="ALWAYS" styleClass="input-field"/>
+        </HBox>
+        <HBox spacing="6">
+          <Button text="＋ Створити" onAction="#onCreatePlaylistClick" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="btn-primary"/>
+        </HBox>
+        <Button text="🗑  Видалити плейлист" onAction="#onDeletePlaylistClick" maxWidth="Infinity" styleClass="btn-danger"/>
+      </VBox>
+
+      <VBox styleClass="card" spacing="10" HBox.hgrow="ALWAYS">
+        <Label fx:id="selectedPlaylistLabel" text="Оберіть плейлист" style="-fx-font-weight: bold;"/>
+        <ListView fx:id="playlistTracksListView" VBox.vgrow="ALWAYS"/>
+
+        <HBox spacing="6" alignment="CENTER">
+          <Label fx:id="currentTimeLabel" text="00:00" styleClass="subtitle"/>
+          <Slider fx:id="seekSlider" HBox.hgrow="ALWAYS" min="0" max="100" value="0"/>
+          <Label fx:id="totalTimeLabel" text="00:00" styleClass="subtitle"/>
+        </HBox>
+        <HBox spacing="8">
+          <Button text="▶  Грати" onAction="#onPlayClick" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="btn-success"/>
+          <Button text="⏹  Стоп" onAction="#onStopClick" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="btn-secondary"/>
+          <Button text="➖  Прибрати з плейлиста" onAction="#onRemoveTrackClick" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="btn-danger"/>
+        </HBox>
+
+        <Separator/>
+
+        <Label text="Додати трек до плейлиста" style="-fx-font-weight: bold;"/>
+        <HBox spacing="8">
+          <ChoiceBox fx:id="addTrackChoiceBox" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="input-field"/>
+          <Button text="＋ Додати" onAction="#onAddTrackClick" styleClass="btn-primary"/>
+        </HBox>
+        <Label fx:id="statusLabel" wrapText="true"/>
+      </VBox>
+    </HBox>
+  </center>
+</BorderPane>

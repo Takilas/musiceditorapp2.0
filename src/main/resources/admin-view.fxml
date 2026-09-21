@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane prefWidth="680" prefHeight="520"
+  xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+
+  <top>
+    <VBox spacing="14" style="-fx-padding: 22 24 14 24;">
+      <HBox styleClass="nav-bar" spacing="4">
+        <Button text="📚  Бібліотека" onAction="#onGoLibraryClick" styleClass="nav-btn"/>
+        <Button text="🎶  Плейлисти" onAction="#onOpenPlaylistsClick" styleClass="nav-btn"/>
+        <Button text="💱  Конвертер" onAction="#onOpenConverterClick" styleClass="nav-btn"/>
+        <Button text="⚙  Налаштування" onAction="#onOpenSettingsClick" styleClass="nav-btn"/>
+        <Button text="👤  Адмін" styleClass="nav-btn-active"/>
+      </HBox>
+      <VBox spacing="2">
+        <Label text="👤 Керування користувачами" styleClass="page-title"/>
+        <Label text="Список зареєстрованих користувачів системи" styleClass="subtitle"/>
+      </VBox>
+    </VBox>
+  </top>
+
+  <center>
+    <VBox styleClass="card">
+      <BorderPane.margin>
+        <Insets left="24" right="24" bottom="10"/>
+      </BorderPane.margin>
+      <TableView fx:id="usersTable" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="usernameColumn" text="Логін" prefWidth="140"/>
+          <TableColumn fx:id="emailColumn" text="Email" prefWidth="200"/>
+          <TableColumn fx:id="roleColumn" text="Роль" prefWidth="90"/>
+          <TableColumn fx:id="registrationColumn" text="Дата реєстрації" prefWidth="160"/>
+        </columns>
+      </TableView>
+    </VBox>
+  </center>
+
+  <bottom>
+    <HBox spacing="10" alignment="CENTER_RIGHT" style="-fx-padding: 14 24 22 24;">
+      <Label fx:id="statusLabel" wrapText="true" HBox.hgrow="ALWAYS"/>
+      <Button text="🗑  Видалити користувача" onAction="#onDeleteUserClick" styleClass="btn-danger"/>
+    </HBox>
+  </bottom>
+</BorderPane>

@@ -45,6 +45,8 @@ public class AppContext {
   private final PaymentService paymentService;
   private final ConversionService conversionService;
   private final AudioEditService audioEditService;
+  private final AdminService adminService;
+  private final PlaylistService playlistService;
 
   private AppContext() {
     this.connectionPool = ConnectionPool.getInstance();
@@ -79,6 +81,8 @@ public class AppContext {
     this.conversionService = new ConversionService(
         conversionOrderRepository, trackRepository, ffmpegService, paymentService);
     this.audioEditService = new AudioEditService(trackRepository, ffmpegService);
+    this.adminService = new AdminService(userRepository);
+    this.playlistService = new PlaylistService(playlistRepository);
   }
 
   public static synchronized AppContext getInstance() {

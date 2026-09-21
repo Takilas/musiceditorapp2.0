@@ -43,6 +43,12 @@ public class LoginController {
         new RegisterController(context, navigator));
   }
 
+  @FXML
+  private void onAboutClick() {
+    navigator.switchScene("/about-view.fxml", "Музичний редактор — Про програму",
+        new AboutController(context, navigator, "/login-view.fxml", "Музичний редактор — Вхід"));
+  }
+
   public void showSuccessMessage(String message) {
     errorLabel.setStyle("-fx-text-fill: #27ae60;");
     errorLabel.setText(message);

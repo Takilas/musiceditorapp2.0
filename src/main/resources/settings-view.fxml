@@ -3,25 +3,46 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_CENTER" spacing="16" prefWidth="420" prefHeight="320"
+<BorderPane prefWidth="480" prefHeight="640"
   xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
-  <padding>
-    <Insets top="25" right="35" bottom="25" left="35"/>
-  </padding>
 
-  <HBox alignment="CENTER_LEFT">
-    <Button text="← Назад до бібліотеки" onAction="#onBackClick" styleClass="link-button"/>
-  </HBox>
+  <top>
+    <VBox spacing="14" style="-fx-padding: 22 30 14 30;">
+      <HBox styleClass="nav-bar" spacing="4">
+        <Button text="📚  Бібліотека" onAction="#onGoLibraryClick" styleClass="nav-btn"/>
+        <Button text="🎶  Плейлисти" onAction="#onOpenPlaylistsClick" styleClass="nav-btn"/>
+        <Button text="💱  Конвертер" onAction="#onOpenConverterClick" styleClass="nav-btn"/>
+        <Button text="⚙  Налаштування" styleClass="nav-btn-active"/>
+        <Button fx:id="adminButton" text="👤  Адмін" onAction="#onOpenAdminClick"
+          visible="false" managed="false" styleClass="nav-btn"/>
+      </HBox>
+      <Label text="⚙ Налаштування" styleClass="page-title"/>
+    </VBox>
+  </top>
 
-  <Label text="⚙ Налаштування" styleClass="page-title"/>
+  <center>
+    <VBox spacing="16">
+      <BorderPane.margin>
+        <Insets left="30" right="30" bottom="26"/>
+      </BorderPane.margin>
 
-  <VBox spacing="8" style="-fx-padding: 10 0 0 0;">
-    <Label text="Тема оформлення:" style="-fx-font-weight: bold;"/>
-    <ChoiceBox fx:id="themeChoiceBox" maxWidth="Infinity"/>
-  </VBox>
+      <VBox styleClass="card" spacing="10">
+        <Label text="🎨  Тема оформлення" style="-fx-font-weight: bold;"/>
+        <ChoiceBox fx:id="themeChoiceBox" maxWidth="Infinity" styleClass="input-field"/>
+      </VBox>
 
-  <Separator/>
+      <VBox styleClass="card" spacing="10">
+        <Label text="🔒  Зміна пароля" style="-fx-font-weight: bold;"/>
+        <PasswordField fx:id="oldPasswordField" promptText="Поточний пароль" styleClass="input-field"/>
+        <PasswordField fx:id="newPasswordField" promptText="Новий пароль" styleClass="input-field"/>
+        <PasswordField fx:id="confirmPasswordField" promptText="Підтвердіть новий пароль" styleClass="input-field"/>
+        <Button text="Змінити пароль" onAction="#onChangePasswordClick"
+          maxWidth="Infinity" styleClass="btn-primary" style="-fx-padding: 9 0 9 0;"/>
+        <Label fx:id="passwordStatusLabel" wrapText="true"/>
+      </VBox>
 
-  <Button text="Вийти з акаунту" onAction="#onLogoutClick" maxWidth="Infinity"
-    style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 10;"/>
-</VBox>
+      <Button text="🚪  Вийти з акаунту" onAction="#onLogoutClick"
+        maxWidth="Infinity" styleClass="btn-danger" style="-fx-padding: 10 0 10 0;"/>
+    </VBox>
+  </center>
+</BorderPane>

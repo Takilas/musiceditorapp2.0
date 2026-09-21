@@ -3,77 +3,90 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefWidth="760" prefHeight="520"
+<BorderPane prefWidth="800" prefHeight="580"
   xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
 
   <top>
-    <VBox spacing="6" style="-fx-padding: 20 20 10 20;">
-      <Button text="← Назад до бібліотеки" onAction="#onBackClick"
-        style="-fx-background-color: transparent; -fx-text-fill: #2e6cbf;"/>
-      <Label fx:id="titleLabel" styleClass="page-title"/>
-      <Label fx:id="durationLabel" styleClass="subtitle"/>
+    <VBox spacing="12" style="-fx-padding: 22 24 10 24;">
+      <HBox styleClass="nav-bar" spacing="4">
+        <Button text="📚  Бібліотека" onAction="#onGoLibraryClick" styleClass="nav-btn"/>
+        <Button text="🎶  Плейлисти" onAction="#onOpenPlaylistsClick" styleClass="nav-btn"/>
+        <Button text="💱  Конвертер" onAction="#onOpenConverterClick" styleClass="nav-btn"/>
+        <Button text="⚙  Налаштування" onAction="#onOpenSettingsClick" styleClass="nav-btn"/>
+        <Button fx:id="adminButton" text="👤  Адмін" onAction="#onOpenAdminClick"
+          visible="false" managed="false" styleClass="nav-btn"/>
+      </HBox>
+      <VBox spacing="2">
+        <Label fx:id="titleLabel" styleClass="page-title"/>
+        <Label fx:id="durationLabel" styleClass="subtitle"/>
+      </VBox>
     </VBox>
   </top>
 
   <center>
-    <HBox spacing="15" style="-fx-padding: 0 20 20 20;">
+    <HBox spacing="16">
+      <BorderPane.margin>
+        <Insets left="24" right="24" bottom="20"/>
+      </BorderPane.margin>
 
-      <TabPane HBox.hgrow="ALWAYS" tabClosingPolicy="UNAVAILABLE">
-        <Tab text="✂ Обрізати">
-          <VBox spacing="10" style="-fx-padding: 20;">
-            <Label text="Початок (секунди):"/>
-            <TextField fx:id="startField" promptText="напр. 0"/>
-            <Label text="Кінець (секунди):"/>
-            <TextField fx:id="endField" promptText="напр. 30"/>
-            <Button text="Застосувати обрізку" onAction="#onApplyCutClick" maxWidth="Infinity"
-              style="-fx-background-color: #3f7cd6; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8;"/>
-          </VBox>
-        </Tab>
+      <VBox styleClass="card" HBox.hgrow="ALWAYS">
+        <TabPane tabClosingPolicy="UNAVAILABLE">
+          <Tab text="✂  Обрізати">
+            <VBox spacing="12" style="-fx-padding: 20;">
+              <Label text="⏱  Початок (секунди)"/>
+              <TextField fx:id="startField" promptText="напр. 0" styleClass="input-field"/>
+              <Label text="⏱  Кінець (секунди)"/>
+              <TextField fx:id="endField" promptText="напр. 30" styleClass="input-field"/>
+              <Button text="✂  Застосувати обрізку" onAction="#onApplyCutClick"
+                maxWidth="Infinity" styleClass="btn-primary" style="-fx-padding: 9 0 9 0;"/>
+            </VBox>
+          </Tab>
 
-        <Tab text="🔊 Гучність">
-          <VBox spacing="10" style="-fx-padding: 20;">
-            <Label text="Гучність (% від оригіналу):"/>
-            <Slider fx:id="volumeSlider" min="10" max="300" value="100" showTickLabels="true" showTickMarks="true" majorTickUnit="50"/>
-            <Label fx:id="volumeValueLabel" text="100%" style="-fx-font-weight: bold;"/>
-            <Button text="Застосувати гучність" onAction="#onApplyVolumeClick" maxWidth="Infinity"
-              style="-fx-background-color: #3f7cd6; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8;"/>
-          </VBox>
-        </Tab>
+          <Tab text="🔊  Гучність">
+            <VBox spacing="12" style="-fx-padding: 20;">
+              <Label text="Гучність (% від оригіналу)"/>
+              <Slider fx:id="volumeSlider" min="10" max="300" value="100" showTickLabels="true" showTickMarks="true" majorTickUnit="50"/>
+              <Label fx:id="volumeValueLabel" text="100%" style="-fx-font-weight: bold; -fx-text-fill: #5B6EF5;"/>
+              <Button text="🔊  Застосувати гучність" onAction="#onApplyVolumeClick"
+                maxWidth="Infinity" styleClass="btn-primary" style="-fx-padding: 9 0 9 0;"/>
+            </VBox>
+          </Tab>
 
-        <Tab text="⏩ Швидкість">
-          <VBox spacing="10" style="-fx-padding: 20;">
-            <Label text="Швидкість (% від оригіналу):"/>
-            <Slider fx:id="speedSlider" min="50" max="200" value="100" showTickLabels="true" showTickMarks="true" majorTickUnit="25"/>
-            <Label fx:id="speedValueLabel" text="100%" style="-fx-font-weight: bold;"/>
-            <Button text="Застосувати швидкість" onAction="#onApplySpeedClick" maxWidth="Infinity"
-              style="-fx-background-color: #3f7cd6; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8;"/>
-          </VBox>
-        </Tab>
+          <Tab text="⏩  Швидкість">
+            <VBox spacing="12" style="-fx-padding: 20;">
+              <Label text="Швидкість (% від оригіналу)"/>
+              <Slider fx:id="speedSlider" min="50" max="200" value="100" showTickLabels="true" showTickMarks="true" majorTickUnit="25"/>
+              <Label fx:id="speedValueLabel" text="100%" style="-fx-font-weight: bold; -fx-text-fill: #5B6EF5;"/>
+              <Button text="⏩  Застосувати швидкість" onAction="#onApplySpeedClick"
+                maxWidth="Infinity" styleClass="btn-primary" style="-fx-padding: 9 0 9 0;"/>
+            </VBox>
+          </Tab>
 
-        <Tab text="🎼 Висота тону">
-          <VBox spacing="10" style="-fx-padding: 20;">
-            <Label text="Висота тону (% від оригіналу):"/>
-            <Slider fx:id="pitchSlider" min="50" max="200" value="100" showTickLabels="true" showTickMarks="true" majorTickUnit="25"/>
-            <Label fx:id="pitchValueLabel" text="100%" style="-fx-font-weight: bold;"/>
-            <Button text="Застосувати висоту тону" onAction="#onApplyPitchClick" maxWidth="Infinity"
-              style="-fx-background-color: #3f7cd6; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8;"/>
-          </VBox>
-        </Tab>
-      </TabPane>
+          <Tab text="🎼  Висота тону">
+            <VBox spacing="12" style="-fx-padding: 20;">
+              <Label text="Висота тону (% від оригіналу)"/>
+              <Slider fx:id="pitchSlider" min="50" max="200" value="100" showTickLabels="true" showTickMarks="true" majorTickUnit="25"/>
+              <Label fx:id="pitchValueLabel" text="100%" style="-fx-font-weight: bold; -fx-text-fill: #5B6EF5;"/>
+              <Button text="🎼  Застосувати висоту тону" onAction="#onApplyPitchClick"
+                maxWidth="Infinity" styleClass="btn-primary" style="-fx-padding: 9 0 9 0;"/>
+            </VBox>
+          </Tab>
+        </TabPane>
+      </VBox>
 
-      <VBox spacing="10" prefWidth="240">
-        <Label text="Версії треку"/>
+      <VBox styleClass="card" spacing="12" prefWidth="250">
+        <Label text="🗂  Версії треку" style="-fx-font-weight: bold;"/>
         <ListView fx:id="versionsListView" VBox.vgrow="ALWAYS"/>
+
         <HBox spacing="6" alignment="CENTER">
-          <Label fx:id="currentTimeLabel" text="00:00" style="-fx-text-fill: gray; -fx-font-size: 11px;"/>
+          <Label fx:id="currentTimeLabel" text="00:00" styleClass="subtitle"/>
           <Slider fx:id="seekSlider" HBox.hgrow="ALWAYS" min="0" max="100" value="0"/>
-          <Label fx:id="totalTimeLabel" text="00:00" style="-fx-text-fill: gray; -fx-font-size: 11px;"/>
+          <Label fx:id="totalTimeLabel" text="00:00" styleClass="subtitle"/>
         </HBox>
+
         <HBox spacing="8">
-          <Button text="▶ Грати" onAction="#onPlayVersionClick" HBox.hgrow="ALWAYS" maxWidth="Infinity"
-            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 6;"/>
-          <Button text="⏹ Стоп" onAction="#onStopVersionClick" HBox.hgrow="ALWAYS" maxWidth="Infinity"
-            style="-fx-background-radius: 6;"/>
+          <Button text="▶  Грати" onAction="#onPlayVersionClick" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="btn-success"/>
+          <Button text="⏹  Стоп" onAction="#onStopVersionClick" HBox.hgrow="ALWAYS" maxWidth="Infinity" styleClass="btn-secondary"/>
         </HBox>
         <Label fx:id="statusLabel" wrapText="true"/>
       </VBox>

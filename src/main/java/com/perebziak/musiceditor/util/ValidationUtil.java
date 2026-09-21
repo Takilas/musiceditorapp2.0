@@ -20,14 +20,12 @@ public class ValidationUtil {
       errors.add("Ім'я користувача має містити від 3 до 50 символів");
     }
 
-    if (email == null || !EMAIL_PATTERN.matcher(email).matches()) {
+    if (!isValidEmail(email)) {
       errors.add("Некоректний формат email");
     }
 
-    if (password == null || password.length() < 8) {
-      errors.add("Пароль має містити щонайменше 8 символів");
-    } else if (!password.matches(".*[A-Za-z].*") || !password.matches(".*\\d.*")) {
-      errors.add("Пароль має містити хоча б одну літеру і одну цифру");
+    if (!isValidPassword(password)) {
+      errors.add("Пароль має містити щонайменше 8 символів, хоча б одну літеру і одну цифру");
     }
 
     return errors.isEmpty() ? ValidationResult.valid() : ValidationResult.invalid(errors);
@@ -35,6 +33,11 @@ public class ValidationUtil {
 
   public boolean isValidEmail(String email) {
     return email != null && EMAIL_PATTERN.matcher(email).matches();
+  }
+
+  public boolean isValidPassword(String password) {
+    return password != null && password.length() >= 8
+        && password.matches(".*[A-Za-z].*") && password.matches(".*\\d.*");
   }
 
   public boolean isValidVerificationCode(String code) {

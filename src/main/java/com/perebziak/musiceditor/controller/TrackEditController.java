@@ -8,6 +8,7 @@ import com.perebziak.musiceditor.util.AlertHelper;
 
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Slider;
@@ -44,6 +45,8 @@ public class TrackEditController {
   @FXML private Label currentTimeLabel;
   @FXML private Label totalTimeLabel;
 
+  @FXML private Button adminButton;
+
   public TrackEditController(AppContext context, SceneNavigator navigator, Track originalTrack) {
     this.context = context;
     this.navigator = navigator;
@@ -72,6 +75,11 @@ public class TrackEditController {
 
     refreshVersions();
     setupSeekBar();
+
+    if (context.getSessionManager().isAdmin()) {
+      adminButton.setVisible(true);
+      adminButton.setManaged(true);
+    }
   }
 
   private void setupSeekBar() {
@@ -178,9 +186,37 @@ public class TrackEditController {
   }
 
   @FXML
-  private void onBackClick() {
+  private void onGoLibraryClick() {
     context.getPlayerService().stop();
     navigator.switchScene("/main-view.fxml", "Музичний редактор — Бібліотека",
         new MainController(context, navigator));
+  }
+
+  @FXML
+  private void onOpenPlaylistsClick() {
+    context.getPlayerService().stop();
+    navigator.switchScene("/playlist-view.fxml", "Музичний редактор — Плейлисти",
+        new PlaylistController(context, navigator));
+  }
+
+  @FXML
+  private void onOpenConverterClick() {
+    context.getPlayerService().stop();
+    navigator.switchScene("/converter-view.fxml", "Музичний редактор — Конвертер",
+        new ConverterController(context, navigator));
+  }
+
+  @FXML
+  private void onOpenSettingsClick() {
+    context.getPlayerService().stop();
+    navigator.switchScene("/settings-view.fxml", "Музичний редактор — Налаштування",
+        new SettingsController(context, navigator));
+  }
+
+  @FXML
+  private void onOpenAdminClick() {
+    context.getPlayerService().stop();
+    navigator.switchScene("/admin-view.fxml", "Музичний редактор — Адміністрування",
+        new AdminController(context, navigator));
   }
 }

@@ -1,32 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="10" prefWidth="380" prefHeight="360"
+<StackPane prefWidth="420" prefHeight="520"
   xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
-  <padding>
-    <Insets top="35" right="35" bottom="35" left="35"/>
-  </padding>
+  <VBox alignment="CENTER" spacing="0" maxWidth="340" styleClass="card">
+    <padding>
+      <Insets top="36" right="34" bottom="30" left="34"/>
+    </padding>
 
-  <Label text="🎵" style="-fx-font-size: 36px;"/>
-  <Label text="Музичний редактор" styleClass="page-title"/>
-  <Label text="Вхід до системи" styleClass="subtitle"/>
+    <StackPane styleClass="logo-circle">
+      <Label text="🎵" style="-fx-font-size: 26px;"/>
+    </StackPane>
 
-  <VBox spacing="10" style="-fx-padding: 15 0 0 0;">
-    <TextField fx:id="usernameField" promptText="Логін або email"
-      style="-fx-background-radius: 6; -fx-padding: 8;"/>
-    <PasswordField fx:id="passwordField" promptText="Пароль"
-      style="-fx-background-radius: 6; -fx-padding: 8;"/>
+    <VBox alignment="CENTER" spacing="2" style="-fx-padding: 16 0 24 0;">
+      <Label text="Музичний редактор" styleClass="page-title"/>
+      <Label text="Вхід до системи" styleClass="subtitle"/>
+    </VBox>
 
-    <Button text="Увійти" defaultButton="true" onAction="#onLoginClick" maxWidth="Infinity"
-      style="-fx-background-color: #3f7cd6; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 8;"/>
-    <Button text="Немає акаунту? Зареєструватися" onAction="#onGoToRegisterClick"
-      maxWidth="Infinity" styleClass="link-button"/>
+    <VBox spacing="10" fillWidth="true">
+      <TextField fx:id="usernameField" promptText="Логін або email" styleClass="input-field"/>
+      <PasswordField fx:id="passwordField" promptText="Пароль" styleClass="input-field"/>
+
+      <Button text="Увійти" defaultButton="true" onAction="#onLoginClick"
+        maxWidth="Infinity" styleClass="btn-primary" style="-fx-padding: 8 0 8 0;"/>
+      <Button text="Немає акаунту? Зареєструватися" onAction="#onGoToRegisterClick"
+        maxWidth="Infinity" styleClass="link-button"/>
+    </VBox>
+
+    <Label fx:id="errorLabel" wrapText="true" style="-fx-padding: 10 0 0 0;"/>
+
+    <Button text="ℹ Про програму" onAction="#onAboutClick"
+      maxWidth="Infinity" styleClass="link-button" style="-fx-padding: 14 0 0 0;"/>
   </VBox>
-
-  <Label fx:id="errorLabel" wrapText="true"/>
-</VBox>
+</StackPane>

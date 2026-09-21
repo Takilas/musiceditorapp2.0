@@ -1,50 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.*?>
 
-<VBox alignment="TOP_CENTER" spacing="14" prefWidth="480" prefHeight="520"
+<BorderPane prefWidth="520" prefHeight="620"
   xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
-  <padding>
-    <Insets top="25" right="35" bottom="25" left="35"/>
-  </padding>
 
-  <HBox alignment="CENTER_LEFT">
-    <Button text="← Назад" onAction="#onBackClick" styleClass="link-button"/>
-  </HBox>
+  <top>
+    <VBox spacing="14" style="-fx-padding: 22 30 14 30;">
+      <HBox styleClass="nav-bar" spacing="4">
+        <Button text="📚  Бібліотека" onAction="#onGoLibraryClick" styleClass="nav-btn"/>
+        <Button text="🎶  Плейлисти" onAction="#onOpenPlaylistsClick" styleClass="nav-btn"/>
+        <Button text="💱  Конвертер" styleClass="nav-btn-active"/>
+        <Button text="⚙  Налаштування" onAction="#onOpenSettingsClick" styleClass="nav-btn"/>
+        <Button fx:id="adminButton" text="👤  Адмін" onAction="#onOpenAdminClick"
+          visible="false" managed="false" styleClass="nav-btn"/>
+      </HBox>
+      <VBox spacing="2">
+        <Label text="💱 Конвертер аудіо" styleClass="page-title"/>
+        <Label text="Платна послуга: конвертація в MP3, WAV або MP4" styleClass="subtitle"/>
+      </VBox>
+    </VBox>
+  </top>
 
-  <Label text="💱 Конвертер аудіо" styleClass="page-title"/>
-  <Label text="Платна послуга: конвертація в MP3, WAV або MP4" styleClass="subtitle"/>
+  <center>
+    <VBox styleClass="card" spacing="14">
+      <BorderPane.margin>
+        <Insets left="30" right="30" bottom="26"/>
+      </BorderPane.margin>
 
-  <VBox spacing="8" style="-fx-padding: 10 0 0 0;">
-    <Label text="Трек:"/>
-    <ChoiceBox fx:id="trackChoiceBox" maxWidth="Infinity"/>
+      <VBox spacing="8">
+        <Label text="🎵  Трек"/>
+        <ChoiceBox fx:id="trackChoiceBox" maxWidth="Infinity" styleClass="input-field"/>
+      </VBox>
 
-    <Label text="Цільовий формат:"/>
-    <ChoiceBox fx:id="formatChoiceBox" maxWidth="Infinity"/>
+      <VBox spacing="8">
+        <Label text="🎯  Цільовий формат"/>
+        <ChoiceBox fx:id="formatChoiceBox" maxWidth="Infinity" styleClass="input-field"/>
+      </VBox>
 
-    <Label fx:id="priceLabel" style="-fx-font-size: 14px; -fx-text-fill: #3f7cd6; -fx-font-weight: bold;"/>
-  </VBox>
+      <Label fx:id="priceLabel" style="-fx-font-size: 15px; -fx-text-fill: #5B6EF5; -fx-font-weight: bold;"/>
 
-  <Separator/>
+      <Separator/>
 
-  <VBox spacing="8">
-    <Label text="Дані картки"/>
-    <TextField fx:id="cardNumberField" promptText="Номер картки (16 цифр)"
-      style="-fx-background-radius: 6; -fx-padding: 8;"/>
-    <HBox spacing="8">
-      <TextField fx:id="expiryField" promptText="MM/YY" HBox.hgrow="ALWAYS"
-        style="-fx-background-radius: 6; -fx-padding: 8;"/>
-      <PasswordField fx:id="cvvField" promptText="CVV" HBox.hgrow="ALWAYS"
-        style="-fx-background-radius: 6; -fx-padding: 8;"/>
-    </HBox>
-  </VBox>
+      <Label text="💳  Дані картки"/>
+      <VBox spacing="10">
+        <TextField fx:id="cardNumberField" promptText="Номер картки (16 цифр)" styleClass="input-field"/>
+        <HBox spacing="10">
+          <TextField fx:id="expiryField" promptText="MM/YY" HBox.hgrow="ALWAYS" styleClass="input-field"/>
+          <PasswordField fx:id="cvvField" promptText="CVV" HBox.hgrow="ALWAYS" styleClass="input-field"/>
+        </HBox>
+      </VBox>
 
-  <Button fx:id="payButton" text="Оплатити і конвертувати" onAction="#onPayAndConvertClick"
-    maxWidth="Infinity"
-    style="-fx-background-color: #3f7cd6; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 10;"/>
+      <Button fx:id="payButton" text="💸  Оплатити і конвертувати" onAction="#onPayAndConvertClick"
+        maxWidth="Infinity" styleClass="btn-primary" style="-fx-padding: 10 0 10 0;"/>
 
-  <ProgressIndicator fx:id="progressIndicator" maxWidth="40" maxHeight="40"/>
-  <Label fx:id="statusLabel" wrapText="true"/>
-</VBox>
+      <ProgressIndicator fx:id="progressIndicator" maxWidth="36" maxHeight="36"/>
+      <Label fx:id="statusLabel" wrapText="true"/>
+    </VBox>
+  </center>
+</BorderPane>

@@ -37,6 +37,7 @@ public class ConverterController {
   @FXML private Button payButton;
   @FXML private ProgressIndicator progressIndicator;
   @FXML private Label statusLabel;
+  @FXML private Button adminButton;
 
   public ConverterController(AppContext context, SceneNavigator navigator) {
     this.context = context;
@@ -63,6 +64,11 @@ public class ConverterController {
     formatChoiceBox.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> updatePrice());
 
     progressIndicator.setVisible(false);
+
+    if (context.getSessionManager().isAdmin()) {
+      adminButton.setVisible(true);
+      adminButton.setManaged(true);
+    }
   }
 
   private void updatePrice() {
@@ -127,9 +133,30 @@ public class ConverterController {
   }
 
   @FXML
-  private void onBackClick() {
+  private void onGoLibraryClick() {
     context.getPlayerService().stop();
     navigator.switchScene("/main-view.fxml", "Музичний редактор — Бібліотека",
         new MainController(context, navigator));
+  }
+
+  @FXML
+  private void onOpenPlaylistsClick() {
+    context.getPlayerService().stop();
+    navigator.switchScene("/playlist-view.fxml", "Музичний редактор — Плейлисти",
+        new PlaylistController(context, navigator));
+  }
+
+  @FXML
+  private void onOpenSettingsClick() {
+    context.getPlayerService().stop();
+    navigator.switchScene("/settings-view.fxml", "Музичний редактор — Налаштування",
+        new SettingsController(context, navigator));
+  }
+
+  @FXML
+  private void onOpenAdminClick() {
+    context.getPlayerService().stop();
+    navigator.switchScene("/admin-view.fxml", "Музичний редактор — Адміністрування",
+        new AdminController(context, navigator));
   }
 }

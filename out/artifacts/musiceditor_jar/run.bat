@@ -1,0 +1,1 @@
+"C:\Users\Stepan\.jdks\openjdk-25.0.2\bin\java.exe" -jar musiceditor.jar

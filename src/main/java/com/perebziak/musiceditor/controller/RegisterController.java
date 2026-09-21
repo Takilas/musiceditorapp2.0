@@ -71,4 +71,10 @@ public class RegisterController {
     navigator.switchScene("/login-view.fxml", "Музичний редактор — Вхід",
         new LoginController(context, navigator));
   }
+
+  @FXML
+  private void onAboutClick() {
+    navigator.switchScene("/about-view.fxml", "Музичний редактор — Про програму",
+        new AboutController(context, navigator, "/register-view.fxml", "Музичний редактор — Реєстрація"));
+  }
 }

@@ -3,63 +3,61 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane prefWidth="720" prefHeight="500"
+<BorderPane prefWidth="760" prefHeight="540"
   xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
 
   <top>
-    <VBox spacing="10" style="-fx-padding: 20 20 10 20;">
+    <VBox spacing="14" style="-fx-padding: 22 24 14 24;">
 
-      <HBox spacing="6" alignment="CENTER_LEFT">
-        <Button text="📚 Бібліотека"
-          style="-fx-background-color: #3f7cd6; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 6 14;"/>
-        <Button text="✂ Редагувати" onAction="#onEditClick"
-          style="-fx-background-color: transparent; -fx-background-radius: 6; -fx-padding: 6 14;"/>
-        <Button text="💱 Конвертер" onAction="#onOpenConverterClick"
-          style="-fx-background-color: transparent; -fx-background-radius: 6; -fx-padding: 6 14;"/>
-        <Button text="⚙ Налаштування" onAction="#onOpenSettingsClick"
-          style="-fx-background-color: transparent; -fx-background-radius: 6; -fx-padding: 6 14;"/>
+      <HBox styleClass="nav-bar" spacing="4">
+        <Button text="📚  Бібліотека" styleClass="nav-btn-active"/>
+        <Button text="🎶  Плейлисти" onAction="#onOpenPlaylistsClick" styleClass="nav-btn"/>
+        <Button text="✂  Редагувати" onAction="#onEditClick" styleClass="nav-btn"/>
+        <Button text="💱  Конвертер" onAction="#onOpenConverterClick" styleClass="nav-btn"/>
+        <Button text="⚙  Налаштування" onAction="#onOpenSettingsClick" styleClass="nav-btn"/>
+        <Button fx:id="adminButton" text="👤  Адмін" onAction="#onOpenAdminClick"
+          visible="false" managed="false" styleClass="nav-btn"/>
       </HBox>
 
       <HBox alignment="CENTER_LEFT" spacing="10">
         <Label text="🎵 Музичний редактор" styleClass="page-title"/>
-        <Label fx:id="welcomeLabel" style="-fx-text-fill: gray;"/>
+        <Label fx:id="welcomeLabel" styleClass="subtitle"/>
       </HBox>
 
       <HBox spacing="8" alignment="CENTER_LEFT">
-        <TextField fx:id="searchField" promptText="Пошук за назвою..." HBox.hgrow="ALWAYS"
-          style="-fx-background-radius: 6; -fx-padding: 6;"/>
-        <Button text="Пошук" onAction="#onSearchClick"
-          style="-fx-background-radius: 6; -fx-padding: 6 12;"/>
-        <Button text="+ Додати трек" onAction="#onAddTrackClick"
-          style="-fx-background-color: #3f7cd6; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 6; -fx-padding: 6 12;"/>
+        <TextField fx:id="searchField" promptText="🔍  Пошук за назвою..." HBox.hgrow="ALWAYS" styleClass="input-field"/>
+        <Button text="Пошук" onAction="#onSearchClick" styleClass="btn-secondary"/>
+        <Button text="＋ Додати трек" onAction="#onAddTrackClick" styleClass="btn-primary"/>
       </HBox>
     </VBox>
   </top>
 
   <center>
-    <TableView fx:id="tracksTable" style="-fx-padding: 0 20 0 20;">
-      <columns>
-        <TableColumn fx:id="titleColumn" text="Назва" prefWidth="300"/>
-        <TableColumn fx:id="durationColumn" text="Тривалість (с)" prefWidth="150"/>
-        <TableColumn fx:id="addedDateColumn" text="Дата додавання" prefWidth="180"/>
-      </columns>
-    </TableView>
+    <VBox styleClass="card" style="-fx-margin: 0 24 0 24;">
+      <TableView fx:id="tracksTable" VBox.vgrow="ALWAYS">
+        <columns>
+          <TableColumn fx:id="titleColumn" text="Назва" prefWidth="320"/>
+          <TableColumn fx:id="durationColumn" text="Тривалість (с)" prefWidth="150"/>
+          <TableColumn fx:id="addedDateColumn" text="Дата додавання" prefWidth="180"/>
+        </columns>
+      </TableView>
+      <VBox.margin>
+        <Insets left="24" right="24"/>
+      </VBox.margin>
+    </VBox>
   </center>
 
   <bottom>
-    <VBox spacing="8" style="-fx-padding: 10 20 20 20;">
-      <HBox spacing="8" alignment="CENTER">
-        <Label fx:id="currentTimeLabel" text="00:00" style="-fx-text-fill: gray; -fx-font-size: 11px;"/>
+    <VBox spacing="10" style="-fx-padding: 14 24 22 24;">
+      <HBox spacing="10" alignment="CENTER">
+        <Label fx:id="currentTimeLabel" text="00:00" styleClass="subtitle"/>
         <Slider fx:id="seekSlider" HBox.hgrow="ALWAYS" min="0" max="100" value="0"/>
-        <Label fx:id="totalTimeLabel" text="00:00" style="-fx-text-fill: gray; -fx-font-size: 11px;"/>
+        <Label fx:id="totalTimeLabel" text="00:00" styleClass="subtitle"/>
       </HBox>
       <HBox spacing="8" alignment="CENTER_RIGHT">
-        <Button fx:id="playButton" text="▶ Відтворити" onAction="#onPlayClick"
-          style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 6 12;"/>
-        <Button text="⏹ Стоп" onAction="#onStopClick"
-          style="-fx-background-radius: 6; -fx-padding: 6 12;"/>
-        <Button fx:id="deleteButton" text="Видалити" onAction="#onDeleteClick"
-          style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 6; -fx-padding: 6 12;"/>
+        <Button fx:id="playButton" text="▶  Відтворити" onAction="#onPlayClick" styleClass="btn-success"/>
+        <Button text="⏹  Стоп" onAction="#onStopClick" styleClass="btn-secondary"/>
+        <Button fx:id="deleteButton" text="Видалити" onAction="#onDeleteClick" styleClass="btn-danger"/>
       </HBox>
     </VBox>
   </bottom>

@@ -39,6 +39,7 @@ public class MainController {
   @FXML private Slider seekSlider;
   @FXML private Label currentTimeLabel;
   @FXML private Label totalTimeLabel;
+  @FXML private Button adminButton;
 
   public MainController(AppContext context, SceneNavigator navigator) {
     this.context = context;
@@ -59,6 +60,11 @@ public class MainController {
 
     refreshTable();
     setupSeekBar();
+
+    if (context.getSessionManager().isAdmin()) {
+      adminButton.setVisible(true);
+      adminButton.setManaged(true);
+    }
   }
 
   private void setupSeekBar() {
@@ -184,6 +190,13 @@ public class MainController {
   }
 
   @FXML
+  private void onOpenPlaylistsClick() {
+    context.getPlayerService().stop();
+    navigator.switchScene("/playlist-view.fxml", "Музичний редактор — Плейлисти",
+        new PlaylistController(context, navigator));
+  }
+
+  @FXML
   private void onOpenConverterClick() {
     context.getPlayerService().stop();
     navigator.switchScene("/converter-view.fxml", "Музичний редактор — Конвертер",
@@ -195,6 +208,13 @@ public class MainController {
     context.getPlayerService().stop();
     navigator.switchScene("/settings-view.fxml", "Музичний редактор — Налаштування",
         new SettingsController(context, navigator));
+  }
+
+  @FXML
+  private void onOpenAdminClick() {
+    context.getPlayerService().stop();
+    navigator.switchScene("/admin-view.fxml", "Музичний редактор — Адміністрування",
+        new AdminController(context, navigator));
   }
 
   private String stripExtension(String fileName) {

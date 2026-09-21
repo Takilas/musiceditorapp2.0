@@ -144,6 +144,19 @@ public class AuthService {
     return String.valueOf(number);
   }
 
+  public void changePassword(Long userId, String oldPassword, String newPassword) {
+    User user = userRepository.findById(userId)
+        .orElseThrow(() -> new AuthException("Користувача не знайдено"));
+    if (!passwordHasher.matches(oldPassword, user.getPasswordHash())) {
+      throw new AuthException("Поточний пароль введено невірно");
+    }
+    if (!validationUtil.isValidPassword(newPassword)) {
+      throw new ValidationException("Новий пароль має містити щонайменше 8 символів, хоча б одну літеру і одну цифру");
+    }
+    user.setPasswordHash(passwordHasher.hash(newPassword));
+    userRepository.save(user);
+  }
+
   private record PendingRegistration(String username, String passwordHash) {
   }
 }

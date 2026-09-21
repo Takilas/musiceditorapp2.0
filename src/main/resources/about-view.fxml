@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="TOP_CENTER" spacing="14" prefWidth="480" prefHeight="480"
+  xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+  <padding>
+    <Insets top="30" right="35" bottom="30" left="35"/>
+  </padding>
+
+  <Label text="🎵" style="-fx-font-size: 34px;"/>
+  <Label text="Про програму" styleClass="page-title"/>
+
+  <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent;">
+    <VBox spacing="10">
+      <Label text="«Музичний редактор» — десктопний застосунок для зберігання, прослуховування та редагування аудіозаписів (MP3, WAV)." wrapText="true"/>
+      <Label text="Можливості:" style="-fx-font-weight: bold;"/>
+      <Label text="• Реєстрація з підтвердженням електронної пошти" wrapText="true"/>
+      <Label text="• Бібліотека треків з пошуком" wrapText="true"/>
+      <Label text="• Редагування звуку: обрізка, гучність, швидкість, висота тону" wrapText="true"/>
+      <Label text="• Конвертація файлів між форматами MP3, WAV, MP4" wrapText="true"/>
+      <Label text="• Світла та темна теми оформлення" wrapText="true"/>
+      <Label text="Версія 1.0 (навчальний проєкт)" styleClass="subtitle" style="-fx-padding: 10 0 0 0;"/>
+      <Label text="Автор: Перебзяк Артем" styleClass="subtitle"/>
+    </VBox>
+  </ScrollPane>
+
+  <Button text="← Назад" onAction="#onBackClick" styleClass="link-button"/>
+</VBox>
